@@ -1,25 +1,100 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import pizzaData from "./item";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Menu />
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
+
+export const Header = () => {
+  return (
+    <>
+      <div className="header">
+        <h1>Fast react Pizza com.</h1>
+      </div>
+    </>
+  );
+};
+
+export const Menu = () => {
+  return (
+    <>
+      <main className="menu">
+        <h2>Our Menu</h2>
+
+        {/* props example */}
+        <Pizza nme="pizzas" nmeprice={100} />
+      </main>{" "}
+    </>
+  );
+};
+
+export const Pizza = () => {
+  // console.log(nme, nmeprice);
+  const pizzasData = pizzaData;
+
+  return (
+    <>
+      <div className="cards">
+        {pizzasData &&
+          pizzasData.map((data) => {
+            return (
+              <>
+                {" "}
+                <div
+                  className={`card ${data.soldOut ? "sold-out" : ""}`}
+                  key={data.name}
+                >
+                  <div className="img-card">
+                    <img src={data.url} alt="" />
+                  </div>
+                  <div className="content">
+                    <h1>{data.name}</h1>
+                    <h4>{data.ingredients}</h4>
+                    <p>${data.price}</p>
+                    <p>{data.soldOut ? "SOLD OUT" : ""}</p>
+                  </div>
+                </div>
+              </>
+            );
+          })}
+      </div>
+    </>
+  );
+};
+
+export const Footer = () => {
+  const hour = new Date().getHours();
+  const openHour = 9;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen); //that js logic using in jsx
+
+  if (!isOpen) return <h1 className="close">Shop Closed!!</h1>;
+  return (
+    <>
+      <footer className="footer">
+        {isOpen ? (
+          <div className="order">
+            <p>
+              We are open current , our closeing time is {closeHour}:00 . Come
+              Us to Online order.
+            </p>
+            <button className="btn">Order Now </button>
+          </div>
+        ) : (
+          <p>
+            We are happy to come in Our {openHour}:00 to {closeHour}:00 .
+          </p>
+        )}{" "}
+      </footer>
+    </>
+  );
+};

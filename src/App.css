@@ -1,38 +1,122 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.cards {
+  margin: 30px auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 80%;
+  height: auto;
+}
+
+.card {
+  width: 350px;
+  height: auto;
+  display: flex;
+  gap: 10px;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0;
+}
+
+.card.sold-out {
+  color: #888;
+}
+
+.card.card.sold-out {
+  filter: grayscale();
+  opacity: 0.4;
+}
+
+.card:hover {
+  transform: scale(1.2) rotate(12deg);
+}
+
+.card .img-card {
+  width: 80%;
+  height: 100%;
+}
+
+.img-card img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.content h1 {
+  font-size: 2.2rem;
+  color: rgba(29, 29, 30, 0.682);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.content h4 {
+  font-size: 1.4rem;
+  color: rgba(26, 24, 24, 0.675);
+}
+
+.content p {
+  font-size: 1.8rem;
+  color: rgba(26, 24, 24, 0.675);
+}
+
+/* for Footer  */
+
+@keyframes colorChange {
+  0% {
+    color: red;
   }
-  to {
-    transform: rotate(360deg);
+  25% {
+    color: rgb(187, 13, 13);
+  }
+
+  50% {
+    color: rgb(255, 132, 0);
+  }
+  75% {
+    color: rgb(203, 100, 9);
+  }
+  100% {
+    color: rgb(255, 0, 0);
+  }
+}
+
+.close {
+  animation: colorChange 4s infinite ease;
+  font-size: 4rem;
+}
+
+@media (max-width: 440px) {
+  .cards {
+    margin: 0;
+  }
+  .card {
+    width: 400px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .card .img-card {
+    width: 100%;
+  }
+  .img-card img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .content {
+    text-align: center;
+    width: 100%;
+    padding-top: 10px;
+    gap: 10px;
   }
 }
